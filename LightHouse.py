@@ -88,24 +88,25 @@ def rstPlasmashell():
 if __name__ == '__main__':
 
     if (len(sys.argv) != 4):
-        subprocess.run("notify-send \"Aurora Theme Switcher\" \"Cannot start! Have you specified the correct arguments?")
-        sys.exit("ERROR! Usage: python3 AuroraThemeSwitcher.py <PLASMA_THEME_NAME> <GTK_THEME> <WALLPAPER_FILENAME>")
+        subprocess.run("notify-send \"LightHouse\" \"Cannot start! Have you specified the correct arguments?\"", shell=True)
+        sys.exit("ERROR! Usage: python3 LightHouse.py <PLASMA_THEME_NAME> <GTK_THEME> <WALLPAPER_FILENAME>")
+        # sys.exit(1)
+    else:
+        plasmaTheme = sys.argv[1]   # "Aritim-Dark_DEV"
+        GTKTheme = sys.argv[2]      # "Aritim-Dark-GTK"
+        
+        # CHANGE here the path where your wallpapers are located
+        wallpaperFilePath = "/home/"+user+"/Pictures/Wallpapers/"+plasmaTheme+"/"
+        wallpaperFilename = sys.argv[3]  # "dunes_NIGHT.jpg"
 
-    plasmaTheme = sys.argv[1]   # "Aritim-Dark_DEV"
-    GTKTheme = sys.argv[2]      # "Aritim-Dark-GTK"
-    
-    # CHANGE here the path where your wallpapers are located
-    wallpaperFilePath = "/home/"+user+"/Pictures/Wallpapers/"+plasmaTheme+"/"
-    wallpaperFilename = sys.argv[3]  # "dunes_NIGHT.jpg"
+        if (checkConfigFiles(path, "kdeglobals", "LookAndFeelPackage=", plasmaTheme)):
+            subprocess.run("notify-send \"LightHouse\" \"There is nothig to do, exiting...\"", shell=True)
+            sys.exit()
+        else:    
+            plasmaGlobalThemeSet()
+            GTKThemeSet()
+            wallpaperSet(wallpaperFilePath + wallpaperFilename, "org.kde.image")
+            konsoleSet()
 
-    if (checkConfigFiles(path, "kdeglobals", "LookAndFeelPackage=", plasmaTheme)):
-        subprocess.run("notify-send \"Aurora Theme Switcher\" \"There is nothig to do, exiting...\"", shell=True)
-        sys.exit()
-    else:    
-        plasmaGlobalThemeSet()
-        GTKThemeSet()
-        wallpaperSet(wallpaperFilePath + wallpaperFilename, "org.kde.image")
-        konsoleSet()
-
-        # rstPlasmashell()
+            # rstPlasmashell()
 
