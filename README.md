@@ -1,4 +1,4 @@
-# Lighthouse Theme Switcher
+# LightHouse Theme Switcher
 
 ## Automatically switch your Plasma Theme (& more) according to the time of the day.
 
@@ -15,13 +15,13 @@
 Table of contents
 =================
 <!--ts-->
-- [Lighthouse Theme Switcher](#lighthouse-theme-switcher)
+- [LightHouse Theme Switcher](#lighthouse-theme-switcher)
   - [Automatically switch your Plasma Theme (& more) according to the time of the day.](#automatically-switch-your-plasma-theme--more-according-to-the-time-of-the-day)
 - [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
-  - [1.1. **What *Lighthouse* can do?**](#11-what-lighthouse-can-do)
-  - [1.2. **What *Lighthouse* cannot do (for now)**](#12-what-lighthouse-cannot-do-for-now)
-  - [1.3. **What's for the future of *Lighthouse*?**](#13-whats-for-the-future-of-lighthouse)
+  - [1.1. **What *LightHouse* can do?**](#11-what-lighthouse-can-do)
+  - [1.2. **What *LightHouse* cannot do (for now)**](#12-what-lighthouse-cannot-do-for-now)
+  - [1.3. **What's for the future of *LightHouse*?**](#13-whats-for-the-future-of-lighthouse)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -33,9 +33,9 @@ Table of contents
 Introduction
 ===
 
-## 1.1. **What *Lighthouse* can do?**
+## 1.1. **What *LightHouse* can do?**
 
-**Lighthouse Theme Switcher** is a simple "all-in-one" `python3` script able to change the overall theme in a KDE Plasma environment: you invoke it and everything is switched in a matter of seconds.
+**LightHouse Theme Switcher** is a simple "all-in-one" `python3` script able to change the overall theme in a KDE Plasma environment: you invoke it and everything is switched in a matter of seconds.
 
 As for now, it can handle the following components:
 
@@ -44,15 +44,15 @@ As for now, it can handle the following components:
 * KDE Plasma's **Wallpaper**
 * KDE Plasma's **Konsole default profile**
 
-## 1.2. **What *Lighthouse* cannot do (for now)**
+## 1.2. **What *LightHouse* cannot do (for now)**
 
-As for now, **Lighthouse Theme Switcher** cannot handle a switching activity based on daytime.
+As for now, **LightHouse Theme Switcher** cannot handle a switching activity based on daytime.
 
-To do that, you can however bind **Lighthouse** to a CronJob in order to invoke it at specific times of the day.
+To do that, you can however bind **LightHouse** to a CronJob in order to invoke it at specific times of the day.
 
 Please, refer to the **wiki** to discover how to do that.
 
-## 1.3. **What's for the future of *Lighthouse*?**
+## 1.3. **What's for the future of *LightHouse*?**
 
 - [x] Switch **Plasma Global Theme**
 - [X] Switch **Wallpaper**
@@ -60,23 +60,22 @@ Please, refer to the **wiki** to discover how to do that.
 - [X] Switch **Konsole Theme**
 - [ ] Drop the use of **Cron** to handle the switch according to the time of the day (too cumbersome to setup)
 - [ ] Switch theme according to Sunrise and Sunset at current location (**geoclue2**?)
-- [ ] Lighthouse deamon (**systemd service**?)
+- [ ] LightHouse deamon (**systemd service**?)
 - [ ] Better Plasma integration (**Plasmoid**?)
 
 Let me know what you think, feel free to [DM me on Twitter](https://twitter.com/mrcuve0) or open an issue specifying your future request.
 
 Dependencies
 ===
-No particular dependency is required, you just need `python3` to launch it. 
-Most (if not all) distros come with `python3` pre-installed.
+Please, refer to the related [section in the **wiki**](https://github.com/Mrcuve0/LightHouse-Theme-Switcher/wiki/01-Themes-and-Dependencies)
 
 Installation
 ===
-Please, refer to the related section in the **wiki**.
+Please, refer to the related [section in the **wiki**](https://github.com/Mrcuve0/LightHouse-Theme-Switcher/wiki/02-Installation)
 
 Usage
 ===
-Please, refer to the related section in the **wiki**.
+Please, refer to the related [section in the **wiki**](https://github.com/Mrcuve0/LightHouse-Theme-Switcher/wiki/03-Configuration)
 
 Repo Development Info
 ===
@@ -119,7 +118,7 @@ OSYUR9NE9SV9LYGFWOAWAPXSQCXEITZXRKHSVSXIKYXUUSGIMIJZMSKCXZBVZRYUVMVS9KYNENVZVVUL
 License
 ===
 
-**Lighthouse Theme Switcher** is licensed under the [GLPv3 license](https://github.com/Mrcuve0/Lighthouse-Theme-Switcher/blob/master/LICENSE).
+**LightHouse Theme Switcher** is licensed under the [GLPv3 license](https://github.com/Mrcuve0/Lighthouse-Theme-Switcher/blob/master/LICENSE).
 
 I always try to be as correct and thankful as possible: if you see some inconsistencies on licenses please be free to open an issue/PR for this repo and explain the problem. I will reply ASAP and fix the issue. The last thing I want to do is to harm someone else's IP. 
 
