@@ -7,7 +7,7 @@
 
 ![Twitter Follow](https://img.shields.io/twitter/follow/Mrcuve0?label=Follow%20Me%21%20%40Mrcuve0&style=social)
 
-![alt text](https://raw.githubusercontent.com/Mrcuve0/Lighthouse-Theme-Switcher/master/screenshots/Lighthouse-Demo.gif)
+![LightHouse Demo](screenshots/LightHouse-Demo.gif)
 
 
 Table of contents
