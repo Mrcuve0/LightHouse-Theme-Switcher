@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "LightHouse: Light Theme Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-p",
+                "Aritim-Light_DEV",
+                "-g",
+                "Aritim-Light-GTK",
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/clouds2_DAY.jpg",
+                "-k",
+                "Aritim-Light_DEV"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Dark Theme Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-p",
+                "Aritim-Dark_DEV",
+                "-g",
+                "Aritim-Dark-GTK",
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/sky_NIGHT2.png",
+                "-k",
+                "Aritim-Dark_DEV"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Konsole Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-k",
+                "Aritim-Light_DEV"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Konsole Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-k",
+                "Aritim-Dark_DEV"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Wallpaper Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/clouds2_DAY.jpg"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Wallpaper Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/sky_NIGHT2.png"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}
