@@ -11,13 +11,32 @@ import dbus
 import notify2
 import sys
 
-### PATHS and user variables ###
+#   _    _  _____ ______ _____   __      __     _____   _____ 
+#  | |  | |/ ____|  ____|  __ \  \ \    / /\   |  __ \ / ____|
+#  | |  | | (___ | |__  | |__) |  \ \  / /  \  | |__) | (___  
+#  | |  | |\___ \|  __| |  _  /    \ \/ / /\ \ |  _  / \___ \ 
+#  | |__| |____) | |____| | \ \     \  / ____ \| | \ \ ____) |
+#   \____/|_____/|______|_|  \_\     \/_/    \_\_|  \_\_____/ 
+#                                                             
+#                                                             
 
 user = pwd.getpwuid(os.getuid())[0]
 configPath = "/home/" + user + "/.config/"
 localPath = "/home/" + user + "/.local/"
+firefoxPath = "/home/" + user + "/.mozilla/firefox/"
+firefoxProfileFolder = "5x01oqmi.default" + "/"     # <-- Change your profile folder here!
+vsCodePath = "/home/" + user + "/.config/Code/User/"
 
 notify2.init('LightHouse')
+
+#   _____  ______ ______   
+#  |  __ \|  ____|  ____|  
+#  | |  | | |__  | |__ ___ 
+#  | |  | |  __| |  __/ __|
+#  | |__| | |____| |  \__ \
+#  |_____/|______|_|  |___/
+#                          
+#                          
 
 # Check if Global Theme exists
 # TODO: check presence of the GTKTheme
@@ -35,9 +54,9 @@ def checkArgs(plasmaTheme, GTKTheme, wallpaper, konsoleTheme):
             sys.exit("LightHouse: ERROR: cannot check Global Theme presence, is lookandfeeltool installed?")
         if plasmaTheme not in res:
             # subprocess.run(args=["notify-send", "LightHouse", "ERROR: cannot find a Global Theme with the given name, check the arguments."])
-            n = notify2.Notification("ERROR", "Cannot find a Global Theme with the given name, check the arguments.")
+            n = notify2.Notification(f"ERROR", f"Cannot find a Global Theme with the given name, check the arguments. [theme_arg = {plasmaTheme} | res = {res}]")
             n.show()
-            sys.exit("LightHouse: ERROR: cannot find a Global Theme with the given name, check the arguments.")
+            sys.exit(f"LightHouse: ERROR: cannot find a Global Theme with the given name, check the arguments. [theme_arg = {plasmaTheme}]")
     else:
         # No PlasmaTheme Provided
         pass
@@ -80,10 +99,14 @@ def checkArgs(plasmaTheme, GTKTheme, wallpaper, konsoleTheme):
         # No Konsole Theme provided
         pass
 
+
 # Check if theme is already applied
 def checkConfigFiles(path, filename, string, themeName):
     with open(path + filename, "r") as file:
-        foundString = re.findall(string + "[A-z \.-]*", str(file.readlines()))[0][:-2]
+        foundString = re.findall(string + "[A-z 0-9 \.\-\,=:_]*", str(file.readlines()))[0]
+        #[:-2]
+        foundString = str.replace(foundString, "\n", "")
+        foundString = str.replace(foundString, "\\n","")
         if (foundString == string + themeName):
             # The theme has been already applied correctly
             file.close()
@@ -97,7 +120,11 @@ def checkConfigFiles(path, filename, string, themeName):
 # Update config file
 def updateFile(path, filename, string, stringToAdd):
     with open(path+filename, "r") as f:
-        currentTheme = re.findall(string + "[A-z \.-]*", str(f.readlines()))[0][:-2]
+        # [A-z \.-]*
+        # [A-z \.\-0-9);]*
+
+        # currentTheme contains the entire line found in the file, to be modified
+        currentTheme = re.findall(string + "[A-z \.,\-0-9();\"β]*", str(f.readlines()))[0][:-2]
     
     with open(path+filename, "r") as f:
         s = f.read()
@@ -106,9 +133,11 @@ def updateFile(path, filename, string, stringToAdd):
             n = notify2.Notification("ERROR", "Cannot find a valid theme entry in the DE config file.")
             n.show()
             return -1
+
     # Safely write the changed content, if found in the file
     with open(path+filename, 'w') as f:
-        s = s.replace(currentTheme, string+stringToAdd)
+        # Let's define the new line that will entirely substitute currentTheme
+        s = s.replace(currentTheme, string.replace("\\", "") +stringToAdd)
         f.write(s)
 
 
@@ -137,6 +166,24 @@ def setGTKTheme():
         n = notify2.Notification("ERROR", "Something has gone wrong when setting the GTK theme...")
         n.show()
 
+    nameComponents = GTKTheme.split("-")
+    if (nameComponents[len(nameComponents) - 1].lower() == "dark"):
+        if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "true") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
+            n.show()
+    elif (nameComponents[len(nameComponents) - 1].lower() == "light"):
+        if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "false") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
+            n.show()
+    # try:
+    #     res = subprocess.run(args=["gsettings", "set", " org.gnome.desktop.interface", " gtk-theme", GTKTheme], text=True, capture_output=True)
+    # except subprocess.CalledProcessError as e:
+    #     return_code = e.returncode
+    #     # subprocess.run(args=["notify-send", "LightHouse", "CRITICAL ERROR: cannot restart plasmashell, WTF?"])
+    #     n = notify2.Notification("CRITICAL ERROR", "Cannot restart plasmashell, WTF?")
+    #     n.show()
+    #     sys.exit("LightHouse: CRITICAL ERROR: cannot restart plasmashell, WTF?") 
+
 
 # Setting the Wallpaper
 def setWallpaper(wallpaper, plugin = 'org.kde.image'):
@@ -163,6 +210,44 @@ def setKonsole(konsoleTheme):
         n.show()
 
 
+# Setting the Firefox theme preference (will be used by websites w/ dark mode (Twitter, Youtube,
+# GitHub etc...))
+def setFirefox(firefoxTheme):
+    # user_pref(\"ui.systemUsesDarkTheme\", 1);
+    filename = "prefs.js"
+    if (str.lower(firefoxTheme) == "dark"):
+        if (updateFile(firefoxPath+firefoxProfileFolder, filename, "user_pref\(\"ui.systemUsesDarkTheme\",", " 1);") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting the Firefox profile...")
+            n.show()
+    elif (str.lower(firefoxTheme) == "light"):
+        if (updateFile(firefoxPath+firefoxProfileFolder, filename, "user_pref\(\"ui.systemUsesDarkTheme\",", " 0);") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting the Firefox profile...")
+            n.show()
+    else:
+        n = notify2.Notification("ERROR", "Firefox profile error: please set either \"dark\" or \"light\"...")
+        n.show()
+
+
+def setVSCode(vscodeTheme):
+    # "workbench.colorTheme": "GitHub Plus",
+    filename = "settings.json"
+    if (updateFile(vsCodePath, filename, "\"workbench.colorTheme\":", " \""+vscodeTheme+"\",") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting VSCode theme...")
+            n.show()
+    if (checkConfigFiles(vsCodePath, filename, "\"latex-workshop.view.pdf.invert\":", f" {str(1)},") is True):
+        # n = notify2.Notification("1 --> 0")
+        # n.show()
+        if (updateFile(vsCodePath, filename, "\"latex-workshop.view.pdf.invert\":", f" {str(0)},") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting VSCode PDF_preview theme...")
+            n.show()
+    else:
+        # n = notify2.Notification("0 --> 1")
+        # n.show()
+        if (updateFile(vsCodePath, filename, "\"latex-workshop.view.pdf.invert\":", f" {str(1)},") == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting VSCode PDF_preview theme...")
+            n.show()
+
+
 # Resetting Plasmashell to solve icon issues
 def rstPlasmashell():
     try:
@@ -175,6 +260,14 @@ def rstPlasmashell():
         sys.exit("LightHouse: CRITICAL ERROR: cannot restart plasmashell, WTF?") 
 
 
+#   __  __          _____ _   _ 
+#  |  \/  |   /\   |_   _| \ | |
+#  | \  / |  /  \    | | |  \| |
+#  | |\/| | / /\ \   | | | . ` |
+#  | |  | |/ ____ \ _| |_| |\  |
+#  |_|  |_/_/    \_\_____|_| \_|
+#                               
+#                               
 
 if __name__ == '__main__':
 
@@ -182,9 +275,11 @@ if __name__ == '__main__':
     GTKTheme = None
     wallpaper = None
     konsoleTheme = None
+    firefoxTheme = None
+    vsCodeTheme = None
 
-    shortOpts = "hp:g:w:k:"
-    longOpts = ["help", "plasma=", "gtk=", "wallpaper=", "konsole="]
+    shortOpts = "hp:g:w:k:f:c:"
+    longOpts = ["help", "plasma=", "gtk=", "wallpaper=", "konsole=", "firefox=", "vscode="]
     argList = sys.argv[1:]
 
     try:
@@ -199,6 +294,8 @@ if __name__ == '__main__':
         print("\t-g=,\t--gtk = GTK_THEME:\t\t\tApply GTKTheme")
         print("\t-w=,\t--wallpaper = WALLPAPER:\t\tApply Wallpaper (indicate /path/to/file)")
         print("\t-k=,\t--konsole = KONSOLE_PROFILE:\t\tApply Konsole Profile")
+        print("\t-f=,\t--firefox = FIREFOX_THEME:\t\tApply Firefox Theme Preference")
+        print("\t-c=,\t--vscode = VSCODE_THEME:\t\tApply VSCode Theme")
         print("")
         print("--- LightHouse Help Page ---")
         sys.exit()
@@ -215,6 +312,8 @@ if __name__ == '__main__':
             print("\t-g,\t--gtk = GTK_THEME:\t\t\tApply GTKTheme")
             print("\t-w=,\t--wallpaper = WALLPAPER:\t\tApply Wallpaper (indicate /path/to/file)")
             print("\t-k,\t--konsole = KONSOLE_PROFILE:\t\tApply Konsole Profile")
+            print("\t-f=,\t--firefox = FIREFOX_THEME:\t\tApply Firefox Theme Preference")
+            print("\t-c=,\t--vscode = VSCODE_THEME:\t\tApply VSCode Theme")
             print("")
             print("--- LightHouse Help Page ---")
             sys.exit()
@@ -226,6 +325,10 @@ if __name__ == '__main__':
             wallpaper = currVal
         elif currArg in ("-k", "--konsole"):
             konsoleTheme = currVal
+        elif currArg in ("-f", "--firefox"):
+            firefoxTheme = currVal
+        elif currArg in ("-c", "--vscode"):
+            vsCodeTheme = currVal
         else:
             pass
     if len(args) == 0:
@@ -238,6 +341,8 @@ if __name__ == '__main__':
             print("\t-g=,\t--gtk = GTK_THEME:\t\t\tApply GTKTheme")
             print("\t-w=,\t--wallpaper = WALLPAPER:\t\tApply Wallpaper (indicate /path/to/file)")
             print("\t-k=,\t--konsole = KONSOLE_PROFILE:\t\tApply Konsole Profile")
+            print("\t-f=,\t--firefox = FIREFOX_THEME:\t\tApply Firefox Theme Preference")
+            print("\t-c=,\t--vscode = VSCODE_THEME:\t\tApply VSCode Theme")
             print("")
             print("--- LightHouse Help Page ---")
             print("")
@@ -260,6 +365,10 @@ if __name__ == '__main__':
             setWallpaper(wallpaper, "org.kde.image")
         if (konsoleTheme != None):
             setKonsole(konsoleTheme)
+        # if (firefoxTheme != None):
+            # setFirefox(firefoxTheme)
+        if (vsCodeTheme != None):
+            setVSCode(vsCodeTheme)
 
         # rstPlasmashell()
 
