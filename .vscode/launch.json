@@ -13,11 +13,15 @@
                 "-p",
                 "Aritim-Light_DEV",
                 "-g",
-                "Aritim-Light-GTK",
+                "Aritim-Light",
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/clouds2_DAY.jpg",
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/05.jpg",
                 "-k",
-                "Aritim-Light_DEV"
+                "Aritim-Light_DEV",
+                "-f",
+                "light",
+                "-c",
+                "GitHub Plus"
             ],
             "console": "integratedTerminal"
         },
@@ -30,11 +34,15 @@
                 "-p",
                 "Aritim-Dark_DEV",
                 "-g",
-                "Aritim-Dark-GTK",
+                "Aritim-Dark",
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/sky_NIGHT2.png",
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/05.jpg",
                 "-k",
-                "Aritim-Dark_DEV"
+                "Aritim-Dark_DEV",
+                "-f",
+                "dark",
+                "-c",
+                "βui - Ayu Dark"
             ],
             "console": "integratedTerminal"
         },
@@ -67,7 +75,7 @@
             "program": "${file}",
             "args": [
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/clouds2_DAY.jpg"
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/05.jpg"
             ],
             "console": "integratedTerminal"
         },
@@ -78,7 +86,51 @@
             "program": "${file}",
             "args": [
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/sky_NIGHT2.png"
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/05.jpg"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Firefox Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-f",
+                "LiGhT"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: Firefox Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-f",
+                "DaRk"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: VSCode Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-c",
+                "GitHub Plus"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LightHouse: VSCode Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-c",
+                "βui - Ayu Dark"
             ],
             "console": "integratedTerminal"
         }
