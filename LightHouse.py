@@ -162,28 +162,31 @@ def setPlasmaGlobalTheme():
 # Setting GTK Theme
 def setGTKTheme(GTKTheme):
     GTKTheme_lower = GTKTheme.lower()
-    gtk_path = configPath+"gtk-3.0/"
-    if (updateFile(gtk_path, "settings.ini", "gtk-theme-name=", GTKTheme) == -1):
-        n = notify2.Notification("ERROR", "Something has gone wrong when setting the GTK theme...")
-        n.show()
-
     nameComponents = GTKTheme_lower.split("-")
-    if ("dark" in nameComponents):
-        if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "true") == -1):
-            n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
+
+    for version in ["3.0", "4.0"]:
+        # Set Theme
+        gtk_path = configPath + f"gtk-{version}/"
+        if (updateFile(gtk_path, "settings.ini", "gtk-theme-name=", GTKTheme) == -1):
+            n = notify2.Notification("ERROR", "Something has gone wrong when setting the GTK theme...")
             n.show()
-    elif ("light" in nameComponents):
-        if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "false") == -1):
-            n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
-            n.show()
+        # Set theme preference
+        if ("dark" in nameComponents):
+            if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "true") == -1):
+                n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
+                n.show()
+        elif ("light" in nameComponents):
+            if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "false") == -1):
+                n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
+                n.show()
+    # FIXME: Does not work 
     # try:
-    #     res = subprocess.run(args=["gsettings", "set", " org.gnome.desktop.interface", " gtk-theme", GTKTheme], text=True, capture_output=True)
+    #     res = subprocess.run(args=["/usr/bin/gsettings", " set", " org.gnome.desktop.interface", " gtk-theme", GTKTheme], text=True, capture_output=True)
     # except subprocess.CalledProcessError as e:
     #     return_code = e.returncode
-    #     # subprocess.run(args=["notify-send", "LightHouse", "CRITICAL ERROR: cannot restart plasmashell, WTF?"])
-    #     n = notify2.Notification("CRITICAL ERROR", "Cannot restart plasmashell, WTF?")
+    #     n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"gtk-theme\"...")
     #     n.show()
-    #     sys.exit("LightHouse: CRITICAL ERROR: cannot restart plasmashell, WTF?") 
+    #     sys.exit("ERROR", "Something has gone wrong when setting the \"gtk-theme\"...")
 
 
 # Setting the Wallpaper
