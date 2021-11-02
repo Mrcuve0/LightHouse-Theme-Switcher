@@ -160,18 +160,19 @@ def setPlasmaGlobalTheme():
 
 
 # Setting GTK Theme
-def setGTKTheme():
+def setGTKTheme(GTKTheme):
+    GTKTheme_lower = GTKTheme.lower()
     gtk_path = configPath+"gtk-3.0/"
     if (updateFile(gtk_path, "settings.ini", "gtk-theme-name=", GTKTheme) == -1):
         n = notify2.Notification("ERROR", "Something has gone wrong when setting the GTK theme...")
         n.show()
 
-    nameComponents = GTKTheme.split("-")
-    if (nameComponents[len(nameComponents) - 1].lower() == "dark"):
+    nameComponents = GTKTheme_lower.split("-")
+    if ("dark" in nameComponents):
         if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "true") == -1):
             n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
             n.show()
-    elif (nameComponents[len(nameComponents) - 1].lower() == "light"):
+    elif ("light" in nameComponents):
         if (updateFile(gtk_path, "settings.ini", "gtk-application-prefer-dark-theme=", "false") == -1):
             n = notify2.Notification("ERROR", "Something has gone wrong when setting the \"prefer-dark-theme\"...")
             n.show()
@@ -360,7 +361,7 @@ if __name__ == '__main__':
         if (plasmaTheme != None):
             setPlasmaGlobalTheme()
         if (GTKTheme != None):
-            setGTKTheme()
+            setGTKTheme(GTKTheme)
         if (wallpaper != None):
             setWallpaper(wallpaper, "org.kde.image")
         if (konsoleTheme != None):
