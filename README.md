@@ -1,7 +1,6 @@
 # LightHouse Theme Switcher
 
-## Automatically switch your Plasma Theme (& more) according to the time of the day.
-
+## Switch your Plasma Theme + Konsole + GTK Apps + VSCode + Wallpaper in an instant
 [![DevelopmentStatus](https://img.shields.io/badge/Development-Ongoing-brightgreen.svg)](https://img.shields.io/badge/Development-Ongoing-brightgreen.svg)
 [![HitCount](http://hits.dwyl.com/Mrcuve0/Lighthouse-Theme-Switcher.svg)](http://hits.dwyl.com/Mrcuve0/Lighthouse-Theme-Switcher) 
 
@@ -16,7 +15,7 @@ Table of contents
 =================
 <!--ts-->
 - [LightHouse Theme Switcher](#lighthouse-theme-switcher)
-  - [Automatically switch your Plasma Theme (& more) according to the time of the day.](#automatically-switch-your-plasma-theme--more-according-to-the-time-of-the-day)
+  - [Switch your Plasma Theme + Konsole + GTK Apps + VSCode + Wallpaper in an instant](#switch-your-plasma-theme--konsole--gtk-apps--vscode--wallpaper-in-an-instant)
 - [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [1.1. **What *LightHouse* can do?**](#11-what-lighthouse-can-do)
@@ -42,7 +41,13 @@ As for now, it can handle the following components:
 * KDE Plasma's **Global Theme**
 * KDE Plasma's **GTK3 Theme**
 * KDE Plasma's **Wallpaper**
-* KDE Plasma's **Konsole default profile**
+* KDE Plasma's **Konsole profile**
+* **Visual Studio Code theme**
+
+Given it's extreme simplicity, *LightHouse* **can also be bound to a pair of custom shortcuts** (or even more, depending on how many themes you want to cycle during a day!).
+
+> For instance, I use `Ctrl+Shift+D` to launch *LightHouse* and switch to a dark theme. To revert back to a light theme, I simply issue `Ctrl+Shift+L`. This is incredibly handy, IMO even more practical than a cronjob as you don't need to adjust the triggering hours as the daylight changes over the year.
+
 
 ## 1.2. **What *LightHouse* cannot do (for now)**
 
@@ -62,6 +67,8 @@ Please, refer to the **wiki** to discover how to do that.
 - [ ] Switch theme according to Sunrise and Sunset at current location (**geoclue2**?)
 - [ ] LightHouse deamon (**systemd service**?)
 - [ ] Better Plasma integration (**Plasmoid**?)
+
+> The above list will probably remain as it is, as I want to keep this script KISS (Keep It Simple/Stupid) waiting for an official solution coming from KDE devs.
 
 Let me know what you think, feel free to [DM me on Twitter](https://twitter.com/mrcuve0) or open an issue specifying your future request.
 
