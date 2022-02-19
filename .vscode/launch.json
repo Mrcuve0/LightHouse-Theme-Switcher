@@ -15,13 +15,12 @@
                 "-g",
                 "Aritim-Light-GTK",
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/05.jpg",
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/20.jpg",
                 "-k",
                 "Aritim-Light_DEV",
-                "-f",
-                "light",
                 "-c",
-                "GitHub Plus"
+                "GitHub Light",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -36,13 +35,12 @@
                 "-g",
                 "Aritim-Dark-GTK",
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/05.jpg",
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/21.jpg",
                 "-k",
                 "Aritim-Dark_DEV",
-                "-f",
-                "dark",
                 "-c",
-                "βui - Ayu Dark"
+                "GitHub Dark Default",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -53,7 +51,8 @@
             "program": "${file}",
             "args": [
                 "-k",
-                "Aritim-Light_DEV"
+                "Aritim-Light_DEV",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -64,7 +63,8 @@
             "program": "${file}",
             "args": [
                 "-k",
-                "Aritim-Dark_DEV"
+                "Aritim-Dark_DEV",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -75,7 +75,8 @@
             "program": "${file}",
             "args": [
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/05.jpg"
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/20.jpg",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -86,29 +87,8 @@
             "program": "${file}",
             "args": [
                 "-w",
-                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/05.jpg"
-            ],
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "LightHouse: Firefox Light Test",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "args": [
-                "-f",
-                "LiGhT"
-            ],
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "LightHouse: Firefox Dark Test",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "args": [
-                "-f",
-                "DaRk"
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/21.jpg",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -119,7 +99,8 @@
             "program": "${file}",
             "args": [
                 "-c",
-                "GitHub Plus"
+                "GitHub Light",
+                "-v",
             ],
             "console": "integratedTerminal"
         },
@@ -130,7 +111,8 @@
             "program": "${file}",
             "args": [
                 "-c",
-                "βui - Ayu Dark"
+                "GitHub Dark Default",
+                "-v",
             ],
             "console": "integratedTerminal"
         }
