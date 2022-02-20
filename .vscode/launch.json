@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "LightHouse: Light Theme Test",
+            "name": "Light Theme Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -25,7 +25,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: Dark Theme Test",
+            "name": "Dark Theme Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -45,7 +45,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: Konsole Light Test",
+            "name": "Konsole Light Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -57,7 +57,19 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: Konsole Dark Test",
+            "name": "ERROR Konsole Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-k",
+                "Aritim-Fight_DEV",
+                "-v",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Konsole Dark Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -69,7 +81,19 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: Wallpaper Light Test",
+            "name": "ERROR: Konsole Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-k",
+                "Aritim-Bark_DEV",
+                "-v",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Wallpaper Light Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -81,7 +105,19 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: Wallpaper Dark Test",
+            "name": "ERROR: Wallpaper Light Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Light_DEV/ERROR.jpg",
+                "-v",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Wallpaper Dark Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -93,7 +129,19 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: VSCode Light Test",
+            "name": "ERROR: Wallpaper Dark Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": [
+                "-w",
+                "/home/sem/Pictures/Wallpapers/Aritim-Dark_DEV/ERROR.jpg",
+                "-v",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "VSCode Light Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -105,7 +153,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "LightHouse: VSCode Dark Test",
+            "name": "VSCode Dark Test",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -115,6 +163,6 @@
                 "-v",
             ],
             "console": "integratedTerminal"
-        }
+        },
     ]
 }
