@@ -6,7 +6,7 @@ import sys
 import pwd
 
 # Requires dbus-python installed (possibly from distro's package manager)
-import dbus
+import dbus 
 
 import getopt
 import logging
@@ -155,7 +155,7 @@ def check_config_files(
         bool: False if the theme cannot be found in the configuration file, True otherwise.
     """    
     with open(path + filename, "r") as file:
-        string_found = re.findall(configuration_string + "[A-z 0-9 \.\-\,=:_]*", str(file.readlines()))[0]
+        string_found = re.findall(configuration_string + r"[A-z 0-9 \.\-\,=:_]*", str(file.readlines()))[0]
         #[:-2]
         string_found = str.replace(string_found, "\n", "")
         string_found = str.replace(string_found, "\\n","")
@@ -190,7 +190,7 @@ def update_file(
         # [A-z \.\-0-9);]*
 
         # current_theme contains the entire line found in the file, to be modified
-        current_theme = re.findall(configuration_string + "[A-z \.,\-0-9();\"β]*", str(f.readlines()))[0][:-2]
+        current_theme = re.findall(configuration_string + r"[A-z \.,\-0-9();\"β]*", str(f.readlines()))[0][:-2]
         logger.debug(f"current_theme: {current_theme}")
 
     with open(path+filename, "r") as f:
@@ -301,7 +301,7 @@ def set_konsole(konsole_profile: str) -> None:
     pids = str(res.stdout, "UTF-8").replace("\n", "").split()
     logger.debug(f"PIDs: {pids}")
     # Now, for each Konsole qindow (i.e. PID), get how many sessions there are and their unique number
-    session_extractor = re.compile("<node name=\"([0-9]*)\"\/>")
+    session_extractor = re.compile(r"<node name=\"([0-9]*)\"\/>")
     for pid in pids:
         output_string = ""
         try:
@@ -434,8 +434,8 @@ if __name__ == '__main__':
     logger.handlers[0].setLevel(logging.INFO)
 
     short_opts : str = "hp:g:w:k:f:c:v"
-    long_opts : list = ["help", "plasma=", "gtk=", "wallpaper=", "konsole=", "vscode=", "verbose"]
-    arg_list : list = sys.argv[1:]
+    long_opts : list[str] = ["help", "plasma=", "gtk=", "wallpaper=", "konsole=", "vscode=", "verbose"]
+    arg_list : list[str] = sys.argv[1:]
 
     try:
         args, vals = getopt.getopt(arg_list, short_opts, long_opts);
