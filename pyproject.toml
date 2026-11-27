@@ -1,0 +1,19 @@
+[tool.pyright]
+extraPaths = ["src"]
+pythonVersion = "3.10"
+typeCheckingMode = "standard"
+
+[project]
+name = "lighthouse-theme-switcher"
+version = "1.1.0"
+description = "Switch themes for Plasma, GTK, Konsole and VS Code at once"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-or-later"   
+authors = [
+    { name = "Mrcuve0" },
+    { name = "FalkenkralleMc" },
+]
+dependencies = [
+    "dbus-python",
+]
